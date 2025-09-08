@@ -6,69 +6,69 @@
 
 <div class="w-full">
   <div class="w-full">
-    <div class="grid grid-cols-2 min-h-[600px]">
+    <div class="grid min-h-[600px] grid-cols-2">
       <!-- Left column - single large product -->
       {% assign first_product = sorted_products.first %}
       {% if first_product %}
-        <a href="{{ first_product.url }}" class="relative block cursor-pointer">
-          <div class="relative w-full h-full overflow-hidden">
+        <div class="relative block">
+          <a href="{{ first_product.url }}" class="relative block h-full w-full cursor-pointer overflow-hidden">
             {% if first_product.featured_media %}
               <img
                 src="{{ first_product.featured_media | image_url: width: 800 }}"
                 alt="{{ first_product.featured_media.alt | escape }}"
-                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                 loading="lazy"
               >
             {% else %}
-              <div class="w-full h-full flex items-center justify-center">
+              <div class="flex h-full w-full items-center justify-center">
                 <span class="text-gray-400">No image</span>
               </div>
             {% endif %}
 
-            <div class="absolute top-3 right-3 bg-black bg-opacity-80 text-white px-3 py-1.5 text-sm font-semibold">
+            <div class="absolute right-3 top-3 bg-black bg-opacity-80 px-3 py-1.5 text-sm font-semibold text-white">
               {{ first_product.price | money }}
             </div>
-          </div>
+          </a>
 
-          <div class="absolute bottom-0 left-0 right-0 py-4 px-4 flex items-center justify-between">
-            <h3 class="text-lg font-semibold leading-tight">{{ first_product.title }}</h3>
-            <span class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 font-semibold uppercase tracking-wide transition-colors duration-300 pointer-events-none">
-              Shop Now
-            </span>
+          <div class="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-4">
+            <a href="{{ first_product.url }}" class="text-lg font-semibold leading-tight hover:underline">
+              {{ first_product.title }}
+            </a>
+            {% render 'cta-button', button_text: 'Shop Now', button_url: first_product.url %}
           </div>
-        </a>
+        </div>
       {% endif %}
 
       <!-- Right column - two stacked products -->
       <div class="grid grid-rows-2">
         {% for product in sorted_products limit: 2 offset: 1 %}
-          <a href="{{ product.url }}" class="relative block cursor-pointer">
-            <div class="relative w-full aspect-square overflow-hidden">
+          <div class="relative block">
+            <a href="{{ product.url }}" class="relative block aspect-square w-full cursor-pointer overflow-hidden">
               {% if product.featured_media %}
                 <img
                   src="{{ product.featured_media | image_url: width: 600 }}"
                   alt="{{ product.featured_media.alt | escape }}"
-                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                   loading="lazy"
                 >
               {% else %}
-                <div class="w-full h-full flex items-center justify-center">
+                <div class="flex h-full w-full items-center justify-center">
                   <span class="text-gray-400">No image</span>
                 </div>
               {% endif %}
 
-              <div class="absolute top-3 right-3 bg-black bg-opacity-80 text-white px-3 py-1.5 text-sm font-semibold">
+              <div class="absolute right-3 top-3 bg-black bg-opacity-80 px-3 py-1.5 text-sm font-semibold text-white">
                 {{ product.price | money }}
               </div>
-            </div>
+            </a>
 
-            <div class="absolute bottom-0 left-0 right-0 py-4 px-4 flex items-center justify-between">
-              <h3 class="text-lg font-semibold leading-tight">{{ product.title }}</h3>
-              <span class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 font-semibold uppercase tracking-wide transition-colors duration-300 pointer-events-none">
-                Shop Now
-              </span>
+            <div class="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-4">
+              <a href="{{ product.url }}" class="text-lg font-semibold leading-tight hover:underline">
+                {{ product.title }}
+              </a>
+              {% render 'cta-button', button_text: 'Shop Now', button_url: product.url %}
             </div>
-          </a>
+          </div>
         {% endfor %}
       </div>
     </div>
