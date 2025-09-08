@@ -10,5 +10,6 @@ export default defineConfig({
   ],
   build: {
     manifest: 'manifest.json', // Put manifest in root of assets, not .vite subfolder
+    sourcemap: true, // Generate source maps for debugging
   },
 })
