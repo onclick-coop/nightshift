@@ -1,0 +1,111 @@
+{%- liquid
+  assign products_to_show = section.settings.products_to_show | default: 3
+  assign collection = collections[section.settings.collection] | default: collections.all
+  assign sorted_products = collection.products | sort: 'created_at' | reverse
+-%}
+
+<div class="w-full">
+  <div class="w-full">
+    <div class="grid grid-cols-2 min-h-[600px]">
+      <!-- Left column - single large product -->
+      {% assign first_product = sorted_products.first %}
+      {% if first_product %}
+        <a href="{{ first_product.url }}" class="relative block cursor-pointer">
+          <div class="relative w-full h-full overflow-hidden">
+            {% if first_product.featured_media %}
+              <img 
+                src="{{ first_product.featured_media | image_url: width: 800 }}" 
+                alt="{{ first_product.featured_media.alt | escape }}"
+                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                loading="lazy"
+              >
+            {% else %}
+              <div class="w-full h-full flex items-center justify-center">
+                <span class="text-gray-400">No image</span>
+              </div>
+            {% endif %}
+            
+            <div class="absolute top-3 right-3 bg-black bg-opacity-80 text-white px-3 py-1.5 text-sm font-semibold">
+              {{ first_product.price | money }}
+            </div>
+          </div>
+          
+          <div class="absolute bottom-0 left-0 right-0 py-4 px-4 flex items-center justify-between">
+            <h3 class="text-lg font-semibold leading-tight">{{ first_product.title }}</h3>
+            <span class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 font-semibold uppercase tracking-wide transition-colors duration-300 pointer-events-none">
+              Shop Now
+            </span>
+          </div>
+        </a>
+      {% endif %}
+
+      <!-- Right column - two stacked products -->
+      <div class="grid grid-rows-2">
+        {% for product in sorted_products limit: 2 offset: 1 %}
+          <a href="{{ product.url }}" class="relative block cursor-pointer">
+            <div class="relative w-full aspect-square overflow-hidden">
+              {% if product.featured_media %}
+                <img 
+                  src="{{ product.featured_media | image_url: width: 600 }}" 
+                  alt="{{ product.featured_media.alt | escape }}"
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  loading="lazy"
+                >
+              {% else %}
+                <div class="w-full h-full flex items-center justify-center">
+                  <span class="text-gray-400">No image</span>
+                </div>
+              {% endif %}
+              
+              <div class="absolute top-3 right-3 bg-black bg-opacity-80 text-white px-3 py-1.5 text-sm font-semibold">
+                {{ product.price | money }}
+              </div>
+            </div>
+            
+            <div class="absolute bottom-0 left-0 right-0 py-4 px-4 flex items-center justify-between">
+              <h3 class="text-lg font-semibold leading-tight">{{ product.title }}</h3>
+              <span class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 font-semibold uppercase tracking-wide transition-colors duration-300 pointer-events-none">
+                Shop Now
+              </span>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Featured Products",
+      "label": "Heading"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "Products to show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

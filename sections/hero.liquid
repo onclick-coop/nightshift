@@ -1,0 +1,71 @@
+<section class="hero relative overflow-hidden" style="height: calc(100vh - 36px - 64px - 92px); min-height: 400px;">
+  <!-- Background Image or Gradient -->
+  {% if section.settings.background_image != blank %}
+    <div class="absolute inset-0">
+      <img 
+        src="{{ section.settings.background_image | image_url: width: 1920 }}"
+        alt="{{ section.settings.background_image.alt | escape }}"
+        class="w-full h-full object-cover"
+        loading="eager"
+      >
+    </div>
+  {% else %}
+    <div class="absolute inset-0 hero-fallback-bg h-full">
+    </div>
+  {% endif %}
+</section>
+
+<!-- Content Bar Below Hero -->
+<div class="w-full">
+  <div class="w-full px-6 py-6 flex items-center justify-between">
+    <div class="flex-1">
+      <h1 class="text-xl md:text-2xl lg:text-3xl leading-tight uppercase">
+        {{ section.settings.heading | default: "Born for Rebellion" }}. Dark aesthetic streetwear for those who dare to be different.
+      </h1>
+    </div>
+    {% if section.settings.button_text != blank %}
+      <div class="ml-6">
+        <a href="{{ section.settings.button_url | default: routes.collections_url }}" 
+           class="inline-block bg-red-600 text-white px-6 py-3 font-semibold hover:bg-red-700 transition-colors text-sm shadow-lg whitespace-nowrap uppercase tracking-wide">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image",
+      "info": "Recommended: 1920x1080px for best quality. Leave empty to use default hero image."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Born for Rebellion"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Section"
+    }
+  ]
+}
+{% endschema %}

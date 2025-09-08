@@ -1,0 +1,277 @@
+{% comment %}Product page specific JavaScript{% endcomment %}
+{% render 'vite-tag' with 'product.js' %}
+{% render 'vite-tag' with 'product-gallery.js' %}
+
+<!-- Product Page Layout -->
+<div class="w-full bg-black text-white min-h-screen">
+  <div class="max-w-[1920px] mx-auto px-6 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      
+      <!-- Left Column: Product Images -->
+      <div class="space-y-4">
+        <!-- Main Product Image -->
+        <div class="aspect-[8/10] bg-gray-900 relative overflow-hidden">
+          {% if product.images.size > 0 %}
+            <img 
+              id="main-product-image"
+              src="{{ product.images.first | image_url: width: 800 }}"
+              alt="{{ product.images.first.alt | escape }}"
+              class="w-full h-full object-cover"
+              loading="eager"
+            >
+          {% else %}
+            <div class="w-full h-full flex items-center justify-center text-gray-400">
+              <span>No image available</span>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Thumbnail Gallery -->
+        {% if product.images.size > 1 %}
+          <div class="grid grid-cols-4 gap-0">
+            {% for image in product.images %}
+              <button 
+                type="button"
+                class="thumbnail-btn"
+                onclick="setActiveThumb(this); changeMainImage('{{ image | image_url: width: 800 }}')"
+              >
+                <img 
+                  src="{{ image | image_url: width: 200 }}"
+                  alt="{{ image.alt | escape }}"
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                >
+                <div class="thumbnail-overlay"></div>
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Right Column: Product Details -->
+      <div class="space-y-8">
+        
+        <!-- Product Title & Price -->
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">{{ product.title }}</h1>
+          <div class="flex items-center space-x-4 mb-2">
+            {% if product.compare_at_price > product.price %}
+              <span class="text-2xl font-bold text-red-500">
+                {{ product.price | money }}
+              </span>
+              <span class="text-lg text-gray-400 line-through">
+                {{ product.compare_at_price | money }}
+              </span>
+            {% else %}
+              <span class="text-2xl font-bold text-red-500">
+                {{ product.price | money }}
+              </span>
+            {% endif %}
+          </div>
+          
+          <!-- Stock Status -->
+          {% if product.available %}
+            <p class="text-green-500 text-sm font-medium">✓ In Stock</p>
+          {% else %}
+            <p class="text-red-500 text-sm font-medium">✗ Out of Stock</p>
+          {% endif %}
+        </div>
+
+        <!-- Product Form -->
+        <form action="/cart/add" method="post" enctype="multipart/form-data" class="space-y-6">
+          
+          <!-- Variant Selection -->
+          {% unless product.has_only_default_variant %}
+            {% for option in product.options_with_values %}
+              <div>
+                <label class="block text-sm font-medium mb-2">{{ option.name }}</label>
+                <select 
+                  name="id" 
+                  class="w-full bg-gray-800 border border-gray-600 px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
+                >
+                  {% for variant in product.variants %}
+                    {% if variant.available %}
+                      <option value="{{ variant.id }}">
+                        {{ variant.title }} - {{ variant.price | money }}
+                      </option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+            {% endfor %}
+          {% else %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {% endunless %}
+
+          <!-- Quantity Selector -->
+          <div>
+            <label class="block text-sm font-medium mb-2">Quantity</label>
+            <div class="flex items-center bg-white border border-gray-600 w-32">
+              <button 
+                type="button"
+                onclick="updateQuantity(-1)"
+                class="px-3 py-2 text-black hover:text-gray-600 transition-colors"
+              >
+                −
+              </button>
+              <input 
+                type="number" 
+                name="quantity"
+                value="1"
+                min="1"
+                class="flex-1 px-2 py-2 text-center border-0 bg-white text-black focus:outline-none focus:ring-0"
+                id="quantity-input"
+              >
+              <button 
+                type="button"
+                onclick="updateQuantity(1)"
+                class="px-3 py-2 text-black hover:text-gray-600 transition-colors"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <!-- Add to Cart & Buy Now Buttons -->
+          <div class="space-y-3 sm:space-y-0 sm:space-x-4 sm:flex">
+            <button 
+              type="submit"
+              {% unless product.available %}disabled{% endunless %}
+              class="flex-1 bg-red-600 text-white px-8 py-4 font-medium hover:bg-red-700 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
+            >
+              {% if product.available %}Add to Cart{% else %}Sold Out{% endif %}
+            </button>
+            
+            {% if product.available %}
+              <button 
+                type="button"
+                onclick="buyNow()"
+                class="flex-1 bg-gray-700 text-white px-8 py-4 font-medium hover:bg-gray-600 transition-colors"
+              >
+                Buy Now
+              </button>
+            {% endif %}
+          </div>
+        </form>
+
+        <!-- Product Features -->
+        <div class="space-y-3">
+          <div class="flex items-center space-x-3">
+            <span class="text-green-500">✓</span>
+            <span class="text-sm">Free shipping on orders over $100</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <span class="text-green-500">✓</span>
+            <span class="text-sm">30-day return policy</span>
+          </div>
+          <div class="flex items-center space-x-3">
+            <span class="text-green-500">✓</span>
+            <span class="text-sm">Authentic streetwear guarantee</span>
+          </div>
+        </div>
+
+        <!-- Product Description -->
+        {% if product.description != blank %}
+          <div>
+            <h3 class="text-xl font-semibold mb-4">Product Details</h3>
+            <div class="text-gray-300 leading-relaxed">
+              {{ product.description }}
+            </div>
+          </div>
+        {% endif %}
+
+        <!-- Shipping & Returns -->
+        <div>
+          <h3 class="text-xl font-semibold mb-4">Shipping & Returns</h3>
+          <div class="text-gray-300 space-y-2 text-sm">
+            <p>• Free standard shipping on orders over $100</p>
+            <p>• Express shipping available at checkout</p>
+            <p>• 30-day return window for unworn items</p>
+            <p>• Return shipping costs covered for defective items</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Reviews Section -->
+    <div class="mt-16 border-t border-gray-800 pt-16">
+      <h2 class="text-2xl font-bold mb-8">Customer Reviews</h2>
+      
+      <!-- Review Summary -->
+      <div class="flex items-center space-x-6 mb-8">
+        <div class="flex items-center space-x-2">
+          <div class="flex text-yellow-400">
+            {% assign rating = 4.5 %}
+            {% for i in (1..5) %}
+              {% if i <= rating %}
+                <span>★</span>
+              {% else %}
+                <span class="text-gray-600">★</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <span class="text-lg font-semibold">4.5</span>
+          <span class="text-gray-400">(24 reviews)</span>
+        </div>
+      </div>
+
+      <!-- Sample Reviews -->
+      <div class="space-y-6">
+        <div class="border border-gray-800 p-6">
+          <div class="flex items-center space-x-4 mb-3">
+            <div class="w-10 h-10 bg-gray-700 flex items-center justify-center">
+              <span class="text-sm font-medium">JD</span>
+            </div>
+            <div>
+              <div class="font-medium">Jordan D.</div>
+              <div class="flex text-yellow-400 text-sm">★★★★★</div>
+            </div>
+          </div>
+          <p class="text-gray-300">"Perfect fit and amazing quality. The material feels premium and the design is exactly what I expected from this brand."</p>
+          <div class="text-xs text-gray-500 mt-3">Verified Purchase • 2 weeks ago</div>
+        </div>
+
+        <div class="border border-gray-800 p-6">
+          <div class="flex items-center space-x-4 mb-3">
+            <div class="w-10 h-10 bg-gray-700 flex items-center justify-center">
+              <span class="text-sm font-medium">AS</span>
+            </div>
+            <div>
+              <div class="font-medium">Alex S.</div>
+              <div class="flex text-yellow-400 text-sm">★★★★☆</div>
+            </div>
+          </div>
+          <p class="text-gray-300">"Great streetwear piece. Shipping was fast and packaging was on point. Will definitely order again."</p>
+          <div class="text-xs text-gray-500 mt-3">Verified Purchase • 1 month ago</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateQuantity(change) {
+    const input = document.getElementById('quantity-input');
+    const currentValue = parseInt(input.value);
+    const newValue = Math.max(1, currentValue + change);
+    input.value = newValue;
+  }
+
+  function buyNow() {
+    // Add to cart and redirect to checkout
+    const form = document.querySelector('form[action="/cart/add"]');
+    const formData = new FormData(form);
+    
+    fetch('/cart/add.js', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      window.location.href = '/checkout';
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  }
+</script>

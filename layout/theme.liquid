@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ page_title }}</title>
+  {{ content_for_header }}
+  
+  {%- comment -%} Load theme CSS and JS via vite-plugin-shopify {%- endcomment -%}
+  {% render 'vite-tag' with 'theme.css' %}
+  {% render 'vite-tag' with 'theme.js' %}
+</head>
+<body class="bg-black text-white">
+  {% render 'header' %}
+  
+  {{ content_for_layout }}
+  
+  <div id="dynamic-sections" class="dynamic-sections"></div>
+  
+  {% render 'footer' %}
+</body>
+</html>

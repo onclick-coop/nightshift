@@ -1,0 +1,40 @@
+{
+  "name": "nightshift",
+  "version": "1.0.0",
+  "description": "Nightshift Shopify theme with Vite and Tailwind CSS",
+  "keywords": [
+    "shopify",
+    "theme",
+    "vite",
+    "tailwindcss"
+  ],
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "preview": "vite preview",
+    "shopify:dev": "shopify theme dev --store nightshift-dev",
+    "shopify:pull": "shopify theme pull --store nightshift-dev",
+    "shopify:push": "shopify theme push --store nightshift-dev",
+    "shopify:build": "npm run build && shopify theme push --store nightshift-dev"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "colord": "^2.9.3",
+    "morphdom": "^2.7.7"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.1",
+    "autoprefixer": "^10.4.21",
+    "deepmerge-ts": "^7.1.5",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "twglow": "^0.0.10",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.4",
+    "vite-plugin-shopify": "^4.0.2"
+  }
+}

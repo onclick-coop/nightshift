@@ -1,0 +1,109 @@
+<div class="w-full bg-black text-white min-h-screen">
+  <div class="max-w-[1920px] mx-auto px-6 py-16">
+    <!-- Page Header -->
+    <div class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+        All Collections
+      </h1>
+      <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+        Discover our curated collections of products
+      </p>
+    </div>
+
+    {% if collections.size > 0 %}
+      <!-- Collections Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
+        {% for collection in collections %}
+          {% unless collection.handle == 'frontpage' %}
+            <div class="group bg-black border border-gray-800 hover:border-red-500 transition-all duration-300 overflow-hidden">
+              <!-- Collection Image -->
+              <div class="aspect-[4/3] overflow-hidden relative">
+                {% if collection.featured_image %}
+                  <a href="{{ collection.url }}">
+                    <img 
+                      src="{{ collection.featured_image | image_url: width: 600 }}"
+                      alt="{{ collection.title | escape }}"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    >
+                  </a>
+                {% elsif collection.products.first.featured_image %}
+                  <a href="{{ collection.url }}">
+                    <img 
+                      src="{{ collection.products.first.featured_image | image_url: width: 600 }}"
+                      alt="{{ collection.title | escape }}"
+                      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
+                    >
+                  </a>
+                {% else %}
+                  <div class="w-full h-full bg-gray-900 flex items-center justify-center">
+                    <span class="text-gray-500">No image</span>
+                  </div>
+                {% endif %}
+                
+                <!-- Overlay -->
+                <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300"></div>
+                
+                <!-- Product Count Badge -->
+                <div class="absolute top-4 right-4 bg-black bg-opacity-75 text-white px-3 py-1 text-sm">
+                  {{ collection.products_count }} 
+                  {% if collection.products_count == 1 %}product{% else %}products{% endif %}
+                </div>
+              </div>
+              
+              <!-- Collection Info -->
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-white mb-2">
+                  <a href="{{ collection.url }}" class="hover:text-red-500 transition-colors">
+                    {{ collection.title }}
+                  </a>
+                </h3>
+                
+                {% if collection.description != blank %}
+                  <p class="text-gray-300 text-sm mb-4 line-clamp-2">
+                    {{ collection.description | strip_html | truncate: 120 }}
+                  </p>
+                {% endif %}
+                
+                <a 
+                  href="{{ collection.url }}" 
+                  class="inline-block bg-red-600 text-white px-6 py-2 hover:bg-red-700 transition-colors font-medium text-sm"
+                >
+                  View Collection
+                </a>
+              </div>
+            </div>
+          {% endunless %}
+        {% endfor %}
+      </div>
+      
+    {% else %}
+      <!-- No Collections -->
+      <div class="text-center py-16">
+        <div class="max-w-md mx-auto">
+          <div class="w-24 h-24 mx-auto mb-6 bg-gray-800 flex items-center justify-center">
+            <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+          </div>
+          
+          <h2 class="text-2xl font-bold text-white mb-4">
+            No collections available
+          </h2>
+          
+          <p class="text-gray-300 mb-8">
+            Collections will appear here once they are created.
+          </p>
+          
+          <a 
+            href="{{ routes.root_url }}" 
+            class="inline-block bg-red-600 text-white px-8 py-3 hover:bg-red-700 transition-colors font-medium"
+          >
+            Back to Home
+          </a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
