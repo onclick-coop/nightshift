@@ -1,0 +1,41 @@
+{% comment %}
+  Product Card Snippet
+
+  Parameters:
+  - product: Product object (required)
+  - size: 'large' or 'small' (default: 'small')
+  - aspect: CSS aspect ratio class (default: 'aspect-square')
+{% endcomment %}
+
+{% assign card_size = size | default: 'small' %}
+{% assign aspect_ratio = aspect | default: 'aspect-square' %}
+
+<div class="relative {% if card_size == 'large' %}h-full{% else %}{{ aspect_ratio }}{% endif %} flex items-end overflow-hidden">
+  <a href="{{ product.url }}" class="absolute inset-0 cursor-pointer">
+    {% if product.featured_media %}
+      <img
+        src="{{ product.featured_media | image_url: width: 800 }}"
+        alt="{{ product.featured_media.alt | escape }}"
+        width="100%"
+        height="100%"
+        class="size-full object-cover transition-transform duration-300 hover:scale-105"
+        loading="lazy"
+      >
+    {% else %}
+      <div class="flex h-full w-full items-center justify-center bg-gray-100">
+        <span class="text-gray-400">No image</span>
+      </div>
+    {% endif %}
+
+    <div class="absolute right-3 top-3 bg-black bg-opacity-80 px-3 py-1.5 text-sm font-semibold text-white">
+      {{ product.price | money }}
+    </div>
+  </a>
+
+  <div class="relative z-10 flex w-full items-center justify-between px-4 py-4">
+    <a href="{{ product.url }}" class="text-lg font-semibold leading-tight text-white hover:underline">
+      {{ product.title }}
+    </a>
+    {% render 'cta-button', button_text: 'Shop Now', button_url: product.url %}
+  </div>
+</div>

@@ -10,65 +10,13 @@
       <!-- Left column - single large product -->
       {% assign first_product = sorted_products.first %}
       {% if first_product %}
-        <div class="relative block">
-          <a href="{{ first_product.url }}" class="relative block h-full w-full cursor-pointer overflow-hidden">
-            {% if first_product.featured_media %}
-              <img
-                src="{{ first_product.featured_media | image_url: width: 800 }}"
-                alt="{{ first_product.featured_media.alt | escape }}"
-                class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                loading="lazy"
-              >
-            {% else %}
-              <div class="flex h-full w-full items-center justify-center">
-                <span class="text-gray-400">No image</span>
-              </div>
-            {% endif %}
-
-            <div class="absolute right-3 top-3 bg-black bg-opacity-80 px-3 py-1.5 text-sm font-semibold text-white">
-              {{ first_product.price | money }}
-            </div>
-          </a>
-
-          <div class="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-4">
-            <a href="{{ first_product.url }}" class="text-lg font-semibold leading-tight hover:underline">
-              {{ first_product.title }}
-            </a>
-            {% render 'cta-button', button_text: 'Shop Now', button_url: first_product.url %}
-          </div>
-        </div>
+        {% render 'product-card', product: first_product, size: 'large' %}
       {% endif %}
 
       <!-- Right column - two stacked products -->
       <div class="grid grid-rows-2">
         {% for product in sorted_products limit: 2 offset: 1 %}
-          <div class="relative block">
-            <a href="{{ product.url }}" class="relative block aspect-square w-full cursor-pointer overflow-hidden">
-              {% if product.featured_media %}
-                <img
-                  src="{{ product.featured_media | image_url: width: 600 }}"
-                  alt="{{ product.featured_media.alt | escape }}"
-                  class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                  loading="lazy"
-                >
-              {% else %}
-                <div class="flex h-full w-full items-center justify-center">
-                  <span class="text-gray-400">No image</span>
-                </div>
-              {% endif %}
-
-              <div class="absolute right-3 top-3 bg-black bg-opacity-80 px-3 py-1.5 text-sm font-semibold text-white">
-                {{ product.price | money }}
-              </div>
-            </a>
-
-            <div class="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-4">
-              <a href="{{ product.url }}" class="text-lg font-semibold leading-tight hover:underline">
-                {{ product.title }}
-              </a>
-              {% render 'cta-button', button_text: 'Shop Now', button_url: product.url %}
-            </div>
-          </div>
+          {% render 'product-card', product: product, size: 'small' %}
         {% endfor %}
       </div>
     </div>
