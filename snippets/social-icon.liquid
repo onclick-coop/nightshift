@@ -1,0 +1,20 @@
+{% comment %}
+  Social Icon Link Snippet
+
+  Parameters:
+  - url: Link URL (required)
+  - icon: Icon name to render (required)
+  - alt: Alternative text for accessibility (required)
+  - class: Additional CSS classes for the SVG (optional, default: 'size-5')
+{% endcomment %}
+
+{% assign svg_class = class | default: 'size-5' %}
+<a
+  href="{{ url }}"
+  class="text-gray-400 transition-colors hover:text-red-500"
+  aria-label="{{ alt }}"
+>
+  <div class="{{ svg_class }}">
+    {% render 'icon', name: icon %}
+  </div>
+</a>

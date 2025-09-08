@@ -17,7 +17,11 @@ const ICONS_NEEDED = [
   'menu-line',
   'close-line',
   'arrow-right-line',
-  'star-line'
+  'star-line',
+  'pinterest-line',
+  'instagram-line',
+  'twitter-line',
+  'tiktok-line'
 ]
 
 // Function to find icon file recursively
