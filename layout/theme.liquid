@@ -4,6 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>{{ page_title }}</title>
+
+    <meta
+      name="description"
+      content="{{ page_description | default: shop.description | default: 'Dark aesthetic streetwear for those who dare to be different.' | escape }}"
+    >
+
     {{ content_for_header }}
 
     {%- comment -%} Load theme CSS and JS via vite-plugin-shopify {%- endcomment -%}
