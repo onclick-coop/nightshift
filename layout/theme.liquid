@@ -10,11 +10,8 @@
       content="{{ page_description | default: shop.description | default: 'Dark aesthetic streetwear for those who dare to be different.' | escape }}"
     >
 
-    {{ content_for_header }}
-
-    {%- comment -%} Load theme CSS and JS via vite-plugin-shopify {%- endcomment -%}
+    {%- comment -%} Load critical CSS first {%- endcomment -%}
     {% render 'vite-tag' with 'theme.css' %}
-    {% render 'vite-tag' with 'theme.js' %}
   </head>
   <body class="bg-black text-white">
     {% render 'header' %}
@@ -24,5 +21,11 @@
     <div id="dynamic-sections" class="dynamic-sections"></div>
 
     {% render 'footer' %}
+
+    {%- comment -%} Load Shopify scripts after content {%- endcomment -%}
+    {{ content_for_header }}
+
+    {%- comment -%} Load theme JS with defer {%- endcomment -%}
+    {% render 'vite-tag' with 'theme.js' %}
   </body>
 </html>
