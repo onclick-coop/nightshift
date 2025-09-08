@@ -1,6 +1,6 @@
 {
   "printWidth": 120,
-  "plugins": ["prettier-plugin-tailwindcss", "@shopify/prettier-plugin-liquid"],
+  "plugins": ["@shopify/prettier-plugin-liquid", "prettier-plugin-tailwindcss"],
   "overrides": [
     {
       "files": "*.liquid",

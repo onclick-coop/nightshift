@@ -38,24 +38,20 @@ const baseTheme = {
 }
 
 const nightshiftTheme = {
-  screens: {
-    'lt-xl': { max: '1279px' }, // Targets devices less than xl (1280px)
-    print: { raw: 'print' },
-    screen: { raw: 'screen' },
-  },
   spacing: {
     '2px': '2px',
     // 'section-padding': linearClamp(24, 48),
     // 'section-gap': linearClamp(36, 48),
     // 'callout-padding': linearClamp(24, 36),
   },
-  fontFamily: {
-    'plex-mono': ['IBM Plex Mono', 'monospace'],
-  },
   backgroundImage: {},
+  height: {
+    'hero-section': 'calc(100vh - 64px - 56px)',
+  },
   fontSize: {
-    hero: [linearClamp(36, 96), linearClamp(36 * 1.25, 96 * 1.0625)],
-    callout: [linearClamp(16, 20), linearClamp(16 * 1.625, 20 * 1.625)],
+    'hero-content': [linearClamp(11, 28), 1.25],
+
+    // callout: [linearClamp(16, 20), linearClamp(16 * 1.625, 20 * 1.625)],
 
     // Governance Landing
     // 'governance-title': [linearClamp(28, 64), linearClamp(28 * 1.25, 64 * 1.125)],

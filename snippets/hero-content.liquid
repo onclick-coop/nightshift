@@ -1,0 +1,9 @@
+<div class="flex w-full items-center justify-between gap-4 bg-black p-6 uppercase">
+  <h1 class="text-hero-content flex-1 font-din-exp tracking-wide">
+    {% comment %} {{ heading | default: 'Born for Rebellion' }}. {% endcomment %}
+    Dark aesthetic streetwear for those who dare to be different.
+  </h1>
+  {% if button_text != blank %}
+    {% render 'cta-button', button_text: button_text, button_url: button_url %}
+  {% endif %}
+</div>

@@ -1,3 +1,5 @@
+@import url("~/assets/d-din/d-din.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -43,7 +45,7 @@ main .shopify-section {
 /* Hero background with Vite asset import */
 .hero-fallback-bg {
   @apply bg-cover bg-center;
-  background-image: url("~/assets/hero.png");
+  background-image: var(--hero-bg, url("~/assets/hero.png"));
 }
 
 /* Logo background with Vite asset import */

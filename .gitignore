@@ -1,6 +1,10 @@
 # Compiled assets
 /assets/
 
+# Font assets (keeping only D-DIN)
+src/assets/inter-3.19/
+src/assets/plex-mono-1.1.0/
+
 # Dependencies
 node_modules/
 
