@@ -1,0 +1,70 @@
+<nav class="px-4">
+  <div class="flex h-16 justify-between">
+    <!-- Desktop Navigation -->
+    <div class="flex flex-1 items-center justify-between">
+      <!-- Logo & Left Nav -->
+      <div class="flex items-center gap-8">
+        <a href="{{ routes.root_url }}" class="flex items-center">
+          <div class="logo-bg h-8 w-32"></div>
+        </a>
+        <div class="hidden items-center md:flex">
+          {% render 'nav-link', url: collections.women.url, text: 'WOMEN', alt: 'Women collection' %}
+          {% render 'nav-link', url: collections.men.url, text: 'MEN', alt: 'Men collection' %}
+          {% render 'nav-link', url: routes.collections_url, text: 'SHOP', alt: 'All collections' %}
+          {% render 'nav-link', url: collections.beauty.url, text: 'BEAUTY', alt: 'Beauty collection' %}
+        </div>
+      </div>
+
+      <!-- Right Nav Icons -->
+      <div class="hidden items-center md:flex">
+        {% render 'nav-icon', url: routes.search_url, icon: 'search', alt: 'Search' %}
+        {% render 'nav-icon', url: routes.account_url, icon: 'user', alt: 'Account' %}
+        {% render 'nav-icon', url: routes.root_url, icon: 'heart', alt: 'Wishlist' %}
+        {% render 'nav-icon', url: routes.cart_url, icon: 'shopping_cart', alt: 'Shopping cart' %}
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        {% render 'nav-button', id: 'mobile-menu-button', icon: 'menu', alt: 'Toggle menu' %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu">
+    <div class="grid border-t border-white/10 bg-black">
+      {% render 'nav-link', url: collections.women.url, text: 'WOMEN', alt: 'Women collection' %}
+      {% render 'nav-link', url: collections.men.url, text: 'MEN', alt: 'Men collection' %}
+      {% render 'nav-link', url: routes.collections_url, text: 'SHOP', alt: 'All collections' %}
+      {% render 'nav-link', url: collections.beauty.url, text: 'BEAUTY', alt: 'Beauty collection' %}
+      {% render 'nav-link', url: routes.root_url, text: 'HOME', alt: 'Home' %}
+      {% render 'nav-link', url: '/pages/contact', text: 'CONTACT', alt: 'Contact' %}
+      {% assign cart_text = 'CART (' | append: cart.item_count | append: ')' %}
+      {% render 'nav-link', url: routes.cart_url, text: cart_text, alt: 'Shopping cart' %}
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded');
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    console.log('Button:', mobileMenuButton);
+    console.log('Menu:', mobileMenu);
+
+    if (mobileMenuButton && mobileMenu) {
+      console.log('Adding click listener');
+      mobileMenuButton.addEventListener('click', () => {
+        console.log('Button clicked');
+        mobileMenu.classList.toggle('hidden');
+        console.log('Menu classes:', mobileMenu.className);
+      });
+    } else {
+      console.log('Elements not found');
+      if (!mobileMenuButton) console.log('Button not found');
+      if (!mobileMenu) console.log('Menu not found');
+    }
+  });
+</script>

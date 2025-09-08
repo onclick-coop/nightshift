@@ -16,6 +16,8 @@
     "build": "vite build",
     "dev": "vite",
     "preview": "vite preview",
+    "format": "prettier --write \"**/*.liquid\" \"src/**/*.{js,ts,css}\"",
+    "icons": "node scripts/copy-icons.js",
     "shopify:dev": "shopify theme dev --store nightshift-dev",
     "shopify:pull": "shopify theme pull --store nightshift-dev",
     "shopify:push": "shopify theme push --store nightshift-dev",
@@ -24,13 +26,17 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "colord": "^2.9.3",
-    "morphdom": "^2.7.7"
+    "morphdom": "^2.7.7",
+    "remixicon": "^4.6.0"
   },
   "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.10.0",
     "@types/node": "^24.3.1",
     "autoprefixer": "^10.4.21",
     "deepmerge-ts": "^7.1.5",
     "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "^3.4.17",
     "twglow": "^0.0.10",
     "typescript": "^5.9.2",

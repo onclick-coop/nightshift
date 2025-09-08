@@ -1,0 +1,9 @@
+<button
+  {% if id %}
+    id="{{ id }}"
+  {% endif %}
+  class="flex size-12 items-center justify-center text-white/50 transition-colors hover:text-white [&>svg]:size-5"
+  aria-label="{{ alt }}"
+>
+  {% render 'icon', name: icon %}
+</button>
