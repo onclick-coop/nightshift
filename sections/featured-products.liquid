@@ -4,22 +4,18 @@
   assign sorted_products = collection.products | sort: 'created_at' | reverse
 -%}
 
-<div class="w-full">
-  <div class="w-full">
-    <div class="grid min-h-[600px] grid-cols-2">
-      <!-- Left column - single large product -->
-      {% assign first_product = sorted_products.first %}
-      {% if first_product %}
-        {% render 'product-card', product: first_product, size: 'large' %}
-      {% endif %}
+<div class="grid grid-cols-2">
+  <!-- Left column - single large product -->
+  {% assign first_product = sorted_products.first %}
+  {% if first_product %}
+    {% render 'product-card', product: first_product, size: 'large' %}
+  {% endif %}
 
-      <!-- Right column - two stacked products -->
-      <div class="grid grid-rows-2">
-        {% for product in sorted_products limit: 2 offset: 1 %}
-          {% render 'product-card', product: product, size: 'small' %}
-        {% endfor %}
-      </div>
-    </div>
+  <!-- Right column - two stacked products -->
+  <div class="flex flex-col">
+    {% for product in sorted_products limit: 2 offset: 1 %}
+      {% render 'product-card', product: product, size: 'small' %}
+    {% endfor %}
   </div>
 </div>
 

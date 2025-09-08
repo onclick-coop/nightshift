@@ -4,13 +4,14 @@
   Parameters:
   - product: Product object (required)
   - size: 'large' or 'small' (default: 'small')
-  - aspect: CSS aspect ratio class (default: 'aspect-square')
 {% endcomment %}
 
 {% assign card_size = size | default: 'small' %}
-{% assign aspect_ratio = aspect | default: 'aspect-square' %}
 
-<div class="relative {% if card_size == 'large' %}h-full{% else %}{{ aspect_ratio }}{% endif %} flex items-end overflow-hidden">
+<div
+  class="product-card relative flex items-end overflow-hidden"
+  data-size="{{ card_size }}"
+>
   <a href="{{ product.url }}" class="absolute inset-0 cursor-pointer">
     {% if product.featured_media %}
       <img
@@ -22,7 +23,7 @@
         loading="lazy"
       >
     {% else %}
-      <div class="flex h-full w-full items-center justify-center bg-gray-100">
+      <div class="flex size-full items-center justify-center bg-gray-100">
         <span class="text-gray-400">No image</span>
       </div>
     {% endif %}
@@ -39,3 +40,13 @@
     {% render 'cta-button', button_text: 'Shop Now', button_url: product.url %}
   </div>
 </div>
+
+<style>
+  .product-card[data-size='large'] {
+    height: 100%;
+  }
+
+  .product-card[data-size='small'] {
+    aspect-ratio: 1;
+  }
+</style>
