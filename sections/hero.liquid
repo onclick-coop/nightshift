@@ -5,9 +5,9 @@
       style="--hero-bg: url('{{ section.settings.background_image | image_url: width: 1920 }}')"
     ></div>
   {% else %}
-    <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline>
-      <source src="https://cdn.shopify.com/videos/c/o/v/e68aa85d4cfb47aca4befae6753a2431.mp4" type="video/mp4">
-    </video>
+    {% render 'video-crossfade',
+      video_url: 'https://cdn.shopify.com/videos/c/o/v/e68aa85d4cfb47aca4befae6753a2431.mp4'
+    %}
   {% endif %}
 
   <div class="relative z-10 w-full">
@@ -26,8 +26,8 @@
     {
       "type": "image_picker",
       "id": "background_image",
-      "label": "Background Image",
-      "info": "Fallback image if no video is provided. Recommended: 1920x1080px."
+      "label": "Background Image (Optional)",
+      "info": "Override the default video background with an image. Leave empty to use video."
     },
     {
       "type": "text",

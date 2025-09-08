@@ -1,0 +1,24 @@
+<video
+  class="absolute inset-0 h-full w-full object-cover"
+  id="hero-video-1"
+  autoplay
+  muted
+  playsinline
+  loop
+  style="transition: opacity 1s ease-in-out;"
+>
+  <source src="{{ video_url }}" type="video/mp4">
+</video>
+
+<video
+  class="absolute inset-0 h-full w-full object-cover"
+  id="hero-video-2"
+  muted
+  playsinline
+  loop
+  style="opacity: 0; transition: opacity 1s ease-in-out;"
+>
+  <source src="{{ video_url }}" type="video/mp4">
+</video>
+
+{% render 'vite-tag' with 'video-crossfade.ts' %}
