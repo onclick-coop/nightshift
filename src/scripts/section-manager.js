@@ -144,15 +144,6 @@ class ShopifySectionManager {
       return;
     }
 
-    // Add fade-in animation classes for dynamic sections only
-    sectionElement.classList.add(
-      "opacity-0",
-      "translate-y-5",
-      "transition-all",
-      "duration-600",
-      "ease-out",
-    );
-
     // Check if section already exists
     const existingSection = document.getElementById(sectionElement.id);
 
@@ -164,7 +155,7 @@ class ShopifySectionManager {
       this.container.appendChild(sectionElement);
     }
 
-    // Trigger fade-in animation
+    // Trigger fade-in animation using CSS classes
     await this.triggerFadeIn(sectionElement);
   };
 
@@ -175,8 +166,8 @@ class ShopifySectionManager {
     // Small delay to ensure DOM is ready
     await new Promise((resolve) => setTimeout(resolve, 50));
 
-    element.classList.remove("opacity-0", "translate-y-5");
-    element.classList.add("opacity-100", "translate-y-0");
+    // Use the CSS class from theme.css
+    element.classList.add("section-loaded");
   };
 
   /**

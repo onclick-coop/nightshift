@@ -6,32 +6,15 @@
 
 /* ONLY animate sections inside the dynamic-sections container */
 #dynamic-sections .shopify-section {
-  @apply translate-y-5 opacity-0 transition-all duration-[600ms] ease-out;
+  @apply opacity-0 transition-opacity;
 }
 
 #dynamic-sections .shopify-section.section-loaded {
-  @apply translate-y-0 opacity-100;
+  @apply opacity-100;
 }
 
-/* Stagger animation for multiple dynamic sections */
-#dynamic-sections .shopify-section:nth-child(1) {
-  @apply delay-0;
-}
-#dynamic-sections .shopify-section:nth-child(2) {
-  @apply delay-[100ms];
-}
-#dynamic-sections .shopify-section:nth-child(3) {
-  @apply delay-[200ms];
-}
-#dynamic-sections .shopify-section:nth-child(4) {
-  @apply delay-[300ms];
-}
-#dynamic-sections .shopify-section:nth-child(5) {
-  @apply delay-[400ms];
-}
-
-/* Ensure server-rendered sections don't have transitions */
-main .shopify-section {
+/* Ensure server-rendered sections don't have transitions (but exclude dynamic sections) */
+main .shopify-section:not(#dynamic-sections .shopify-section) {
   opacity: 1 !important;
   transform: none !important;
   transition: none !important;

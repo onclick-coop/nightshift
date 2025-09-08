@@ -1,3 +1,12 @@
 {%- comment -%} Above-the-fold sections - server rendered for SEO {%- endcomment -%}
 {% section 'hero' %}
-{% section 'featured-products' %}
+{%- comment -%} Featured products - now loaded dynamically for better performance {%- endcomment -%}
+{%- comment -%} {% section 'featured-products' %} {%- endcomment -%}
+
+<script>
+  window.addEventListener('load', () => {
+    if (window.sectionManager) {
+      window.sectionManager.loadSection('featured-products');
+    }
+  });
+</script>
