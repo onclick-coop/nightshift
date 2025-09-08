@@ -28,12 +28,12 @@
       </div>
     {% endif %}
 
-    <div class="absolute right-3 top-3 bg-black bg-opacity-80 px-3 py-1.5 text-sm font-semibold text-white">
+    <div class="absolute right-6 top-5 bg-black bg-opacity-80 px-3 py-2 text-sm font-semibold text-white">
       {{ product.price | money }}
     </div>
   </a>
 
-  <div class="relative z-10 flex w-full items-center justify-between px-4 py-4">
+  <div class="relative flex w-full items-center justify-between gap-4 p-6">
     <a href="{{ product.url }}" class="text-lg font-semibold leading-tight text-white hover:underline">
       {{ product.title }}
     </a>
