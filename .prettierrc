@@ -8,12 +8,6 @@
         "parser": "liquid-html",
         "htmlWhitespaceSensitivity": "ignore"
       }
-    },
-    {
-      "files": ["*.ts", "*.js"],
-      "options": {
-        "printWidth": 120
-      }
     }
   ]
 }
