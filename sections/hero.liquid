@@ -5,8 +5,13 @@
       style="--hero-bg: url('{{ section.settings.background_image | image_url: width: 1920 }}')"
     ></div>
   {% else %}
+    {% comment %}
+      Video URLs:
+      - Original (2MB): https://cdn.shopify.com/videos/c/o/v/e68aa85d4cfb47aca4befae6753a2431.mp4
+      - Optimized H.264 (692KB, 65% smaller, no audio): https://cdn.shopify.com/videos/c/o/v/55ec91798073467490088a8e5b18bef4.mp4
+    {% endcomment %}
     {% render 'video-crossfade',
-      video_url: 'https://cdn.shopify.com/videos/c/o/v/55ec91798073467490088a8e5b18bef4.mp4'
+      video_url: 'https://cdn.shopify.com/videos/c/o/v/e68aa85d4cfb47aca4befae6753a2431.mp4'
     %}
   {% endif %}
 
