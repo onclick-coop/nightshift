@@ -33,6 +33,6 @@ jobs:
 
       - name: Deploy to Shopify
         run: |
-          shopify theme push --live \
+          shopify theme push --allow-live --live \
             --store nightshift-dev.myshopify.com \
             --password ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
