@@ -1,14 +1,24 @@
-<section
-  class="h-hero-section hero-fallback-bg flex items-end"
-  {% if section.settings.background_image %}
-    style="--hero-bg: url('{{ section.settings.background_image | image_url: width: 1920 }}')"
+<section class="h-hero-section relative flex items-end overflow-hidden">
+  {% if section.settings.background_video %}
+    <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline>
+      <source src="{{ section.settings.background_video }}" type="video/mp4">
+    </video>
+  {% elsif section.settings.background_image %}
+    <div
+      class="hero-fallback-bg absolute inset-0"
+      style="--hero-bg: url('{{ section.settings.background_image | image_url: width: 1920 }}')"
+    ></div>
+  {% else %}
+    <div class="hero-fallback-bg absolute inset-0"></div>
   {% endif %}
->
-  {% render 'hero-content',
-    heading: section.settings.heading,
-    button_text: section.settings.button_text,
-    button_url: section.settings.button_url
-  %}
+
+  <div class="relative z-10 w-full">
+    {% render 'hero-content',
+      heading: section.settings.heading,
+      button_text: section.settings.button_text,
+      button_url: section.settings.button_url
+    %}
+  </div>
 </section>
 
 {% schema %}
@@ -16,10 +26,16 @@
   "name": "Hero Section",
   "settings": [
     {
+      "type": "url",
+      "id": "background_video",
+      "label": "Background Video URL",
+      "info": "Direct URL to MP4 video file. Upload to Files in Shopify admin first."
+    },
+    {
       "type": "image_picker",
       "id": "background_image",
       "label": "Background Image",
-      "info": "Recommended: 1920x1080px for best quality. Leave empty to use default hero image."
+      "info": "Fallback image if no video is provided. Recommended: 1920x1080px."
     },
     {
       "type": "text",
