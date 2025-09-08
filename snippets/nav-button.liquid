@@ -1,3 +1,12 @@
+{% comment %}
+  Navigation Button Snippet
+
+  Parameters:
+  - id: Button ID attribute (optional)
+  - icon: Icon name to render (required)
+  - alt: Alternative text for accessibility (required)
+{% endcomment %}
+
 <button
   {% if id %}
     id="{{ id }}"
