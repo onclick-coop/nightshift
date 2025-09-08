@@ -3,52 +3,34 @@ import { cva } from 'class-variance-authority'
 console.log('Product gallery with CVA loaded')
 
 // Define thumbnail variants using CVA
-const thumbnailVariants = cva(
-  [
-    'thumbnail-btn',
-    'aspect-[8/10]',
-    'bg-black',
-    'relative',
-    'overflow-hidden',
-    'transition-all',
-    'duration-200',
-  ],
-  {
-    variants: {
-      state: {
-        active: 'border-2 border-red-500',
-        inactive: 'border-2 border-transparent',
-      },
-    },
-    defaultVariants: {
-      state: 'inactive',
+const thumbnailVariants = cva([
+  'relative aspect-[8/10] overflow-hidden bg-black transition-all duration-200',
+], {
+  variants: {
+    state: {
+      active: 'border-2 border-red-500',
+      inactive: 'border-2 border-transparent',
     },
   },
-)
+  defaultVariants: {
+    state: 'inactive',
+  },
+})
 
 // Define overlay variants
-const overlayVariants = cva(
-  [
-    'thumbnail-overlay',
-    'absolute',
-    'inset-0',
-    'bg-red-600',
-    'bg-opacity-30',
-    'transition-opacity',
-    'duration-200',
-  ],
-  {
-    variants: {
-      state: {
-        active: 'opacity-100',
-        inactive: 'opacity-0',
-      },
-    },
-    defaultVariants: {
-      state: 'inactive',
+const overlayVariants = cva([
+  'absolute inset-0 bg-red-600/30 transition-opacity duration-200',
+], {
+  variants: {
+    state: {
+      active: 'opacity-100',
+      inactive: 'opacity-0',
     },
   },
-)
+  defaultVariants: {
+    state: 'inactive',
+  },
+})
 
 // Product gallery functionality
 export const initProductGallery = () => {
