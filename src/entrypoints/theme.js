@@ -10,18 +10,8 @@ import "../assets/nighshift.png";
 
 console.log("Nightshift theme loaded");
 
-// Mobile menu toggle
+// Load below-the-fold sections dynamically on home page
 document.addEventListener("DOMContentLoaded", () => {
-  const mobileMenuButton = document.getElementById("mobile-menu-button");
-  const mobileMenu = document.getElementById("mobile-menu");
-
-  if (mobileMenuButton && mobileMenu) {
-    mobileMenuButton.addEventListener("click", () => {
-      mobileMenu.classList.toggle("hidden");
-    });
-  }
-
-  // Load below-the-fold sections dynamically on home page
   if (
     window.location.pathname === "/" ||
     window.location.pathname === "" ||
