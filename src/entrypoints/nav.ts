@@ -1,7 +1,7 @@
 import { cva } from 'class-variance-authority'
 
 const mobileMenuVariants = cva([
-  'grid max-h-0 overflow-hidden border-t border-white/10 bg-black opacity-0 transition-all',
+  'grid max-h-0 overflow-hidden bg-black opacity-0 transition-all',
 ], {
   variants: {
     state: {
