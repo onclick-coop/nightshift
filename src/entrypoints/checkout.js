@@ -1,8 +1,8 @@
 // Checkout page specific JavaScript
-console.log("Checkout page loaded");
+console.log('Checkout page loaded')
 
 // Checkout enhancement scripts
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   // Add any checkout-specific functionality here
-  console.log("Checkout scripts initialized");
-});
+  console.log('Checkout scripts initialized')
+})
