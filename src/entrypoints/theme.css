@@ -4,14 +4,19 @@
 
 /* Custom styles */
 body {
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 
 /* ONLY animate sections inside the dynamic-sections container */
 #dynamic-sections .shopify-section {
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
 }
 
 #dynamic-sections .shopify-section.section-loaded {
@@ -20,11 +25,21 @@ body {
 }
 
 /* Stagger animation for multiple dynamic sections */
-#dynamic-sections .shopify-section:nth-child(1) { transition-delay: 0ms; }
-#dynamic-sections .shopify-section:nth-child(2) { transition-delay: 100ms; }
-#dynamic-sections .shopify-section:nth-child(3) { transition-delay: 200ms; }
-#dynamic-sections .shopify-section:nth-child(4) { transition-delay: 300ms; }
-#dynamic-sections .shopify-section:nth-child(5) { transition-delay: 400ms; }
+#dynamic-sections .shopify-section:nth-child(1) {
+  transition-delay: 0ms;
+}
+#dynamic-sections .shopify-section:nth-child(2) {
+  transition-delay: 100ms;
+}
+#dynamic-sections .shopify-section:nth-child(3) {
+  transition-delay: 200ms;
+}
+#dynamic-sections .shopify-section:nth-child(4) {
+  transition-delay: 300ms;
+}
+#dynamic-sections .shopify-section:nth-child(5) {
+  transition-delay: 400ms;
+}
 
 /* Ensure server-rendered sections don't have transitions */
 main .shopify-section {
@@ -47,14 +62,14 @@ main .shopify-section {
 
 /* Hero background with Vite asset import */
 .hero-fallback-bg {
-  background-image: url('~/assets/hero.png');
+  background-image: url("~/assets/hero.png");
   background-size: cover;
   background-position: center;
 }
 
 /* Logo background with Vite asset import */
 .logo-bg {
-  background-image: url('~/assets/nighshift.png');
+  background-image: url("~/assets/nighshift.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -62,7 +77,9 @@ main .shopify-section {
 
 /* Feature callouts hover effects */
 .feature-callout {
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  transition:
+    transform 0.3s ease-out,
+    box-shadow 0.3s ease-out;
 }
 
 .feature-callout:hover {

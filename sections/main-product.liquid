@@ -2,13 +2,12 @@
 <div class="w-full bg-black text-white min-h-screen">
   <div class="max-w-[1920px] mx-auto px-6 py-12">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-      
       <!-- Left Column: Product Images -->
       <div class="space-y-4">
         <!-- Main Product Image -->
         <div class="aspect-square bg-gray-900 relative overflow-hidden">
           {% if product.images.size > 0 %}
-            <img 
+            <img
               id="main-product-image"
               src="{{ product.images.first | image_url: width: 800 }}"
               alt="{{ product.images.first.alt | escape }}"
@@ -26,18 +25,20 @@
         {% if product.images.size > 1 %}
           <div class="grid grid-cols-4 gap-0">
             {% for image in product.images %}
-              <button 
+              <button
                 type="button"
                 class="thumbnail-btn aspect-square bg-gray-100 relative overflow-hidden transition-all duration-200 focus:outline-none border-2"
                 onclick="setActiveThumb(this); changeMainImage('{{ image | image_url: width: 800 }}')"
               >
-                <img 
+                <img
                   src="{{ image | image_url: width: 200 }}"
                   alt="{{ image.alt | escape }}"
                   class="w-full h-full object-cover"
                   loading="lazy"
                 >
-                <div class="thumbnail-overlay absolute inset-0 bg-red-600 bg-opacity-30 transition-opacity duration-200"></div>
+                <div
+                  class="thumbnail-overlay absolute inset-0 bg-red-600 bg-opacity-30 transition-opacity duration-200"
+                ></div>
               </button>
             {% endfor %}
           </div>
@@ -46,7 +47,6 @@
 
       <!-- Right Column: Product Details -->
       <div class="space-y-8">
-        
         <!-- Product Title & Price -->
         <div>
           <h1 class="text-3xl md:text-4xl font-bold mb-4">{{ product.title }}</h1>
@@ -64,7 +64,7 @@
               </span>
             {% endif %}
           </div>
-          
+
           <!-- Stock Status -->
           {% if product.available %}
             <p class="text-green-500 text-sm font-medium">✓ In Stock</p>
@@ -75,21 +75,18 @@
 
         <!-- Product Form -->
         <form action="/cart/add" method="post" enctype="multipart/form-data" class="space-y-6">
-          
           <!-- Variant Selection -->
           {% unless product.has_only_default_variant %}
             {% for option in product.options_with_values %}
               <div>
                 <label class="block text-sm font-medium mb-2">{{ option.name }}</label>
-                <select 
-                  name="id" 
+                <select
+                  name="id"
                   class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-red-500"
                 >
                   {% for variant in product.variants %}
                     {% if variant.available %}
-                      <option value="{{ variant.id }}">
-                        {{ variant.title }} - {{ variant.price | money }}
-                      </option>
+                      <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
                     {% endif %}
                   {% endfor %}
                 </select>
@@ -103,22 +100,22 @@
           <div>
             <label class="block text-sm font-medium mb-2">Quantity</label>
             <div class="flex items-center bg-white border border-gray-600 rounded-lg w-32">
-              <button 
+              <button
                 type="button"
                 onclick="updateQuantity(-1)"
                 class="px-3 py-2 text-black hover:text-gray-600 transition-colors"
               >
                 −
               </button>
-              <input 
-                type="number" 
+              <input
+                type="number"
                 name="quantity"
                 value="1"
                 min="1"
                 class="flex-1 px-2 py-2 text-center border-0 bg-white text-black focus:outline-none focus:ring-0"
                 id="quantity-input"
               >
-              <button 
+              <button
                 type="button"
                 onclick="updateQuantity(1)"
                 class="px-3 py-2 text-black hover:text-gray-600 transition-colors"
@@ -130,16 +127,18 @@
 
           <!-- Add to Cart & Buy Now Buttons -->
           <div class="space-y-3 sm:space-y-0 sm:space-x-4 sm:flex">
-            <button 
+            <button
               type="submit"
-              {% unless product.available %}disabled{% endunless %}
+              {% unless product.available %}
+                disabled
+              {% endunless %}
               class="flex-1 bg-red-600 text-white px-8 py-4 font-medium hover:bg-red-700 transition-colors disabled:bg-gray-600 disabled:cursor-not-allowed"
             >
               {% if product.available %}Add to Cart{% else %}Sold Out{% endif %}
             </button>
-            
+
             {% if product.available %}
-              <button 
+              <button
                 type="button"
                 onclick="buyNow()"
                 class="flex-1 bg-gray-700 text-white px-8 py-4 font-medium hover:bg-gray-600 transition-colors"
@@ -192,7 +191,7 @@
     <!-- Customer Reviews Section -->
     <div class="mt-16 border-t border-gray-800 pt-16">
       <h2 class="text-2xl font-bold mb-8">Customer Reviews</h2>
-      
+
       <!-- Review Summary -->
       <div class="flex items-center space-x-6 mb-8">
         <div class="flex items-center space-x-2">
@@ -223,7 +222,10 @@
               <div class="flex text-yellow-400 text-sm">★★★★★</div>
             </div>
           </div>
-          <p class="text-gray-300">"Perfect fit and amazing quality. The material feels premium and the design is exactly what I expected from this brand."</p>
+          <p class="text-gray-300">
+            "Perfect fit and amazing quality. The material feels premium and the design is exactly what I expected from
+            this brand."
+          </p>
           <div class="text-xs text-gray-500 mt-3">Verified Purchase • 2 weeks ago</div>
         </div>
 
@@ -237,7 +239,9 @@
               <div class="flex text-yellow-400 text-sm">★★★★☆</div>
             </div>
           </div>
-          <p class="text-gray-300">"Great streetwear piece. Shipping was fast and packaging was on point. Will definitely order again."</p>
+          <p class="text-gray-300">
+            "Great streetwear piece. Shipping was fast and packaging was on point. Will definitely order again."
+          </p>
           <div class="text-xs text-gray-500 mt-3">Verified Purchase • 1 month ago</div>
         </div>
       </div>
@@ -257,18 +261,18 @@
     // Add to cart and redirect to checkout
     const form = document.querySelector('form[action="/cart/add"]');
     const formData = new FormData(form);
-    
+
     fetch('/cart/add.js', {
       method: 'POST',
-      body: formData
+      body: formData,
     })
-    .then(response => response.json())
-    .then(data => {
-      window.location.href = '/checkout';
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        window.location.href = '/checkout';
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }
 </script>
 

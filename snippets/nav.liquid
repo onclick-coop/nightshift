@@ -1,7 +1,7 @@
-<nav class="px-4">
+<nav>
   <div class="flex h-16 justify-between">
     <!-- Desktop Navigation -->
-    <div class="flex flex-1 items-center justify-between">
+    <div class="flex flex-1 items-center justify-between pl-4">
       <!-- Logo & Left Nav -->
       <div class="flex items-center gap-8">
         <a href="{{ routes.root_url }}" class="flex items-center">
@@ -31,40 +31,16 @@
   </div>
 
   <!-- Mobile Menu -->
-  <div id="mobile-menu">
-    <div class="grid border-t border-white/10 bg-black">
-      {% render 'nav-link', url: collections.women.url, text: 'WOMEN', alt: 'Women collection' %}
-      {% render 'nav-link', url: collections.men.url, text: 'MEN', alt: 'Men collection' %}
-      {% render 'nav-link', url: routes.collections_url, text: 'SHOP', alt: 'All collections' %}
-      {% render 'nav-link', url: collections.beauty.url, text: 'BEAUTY', alt: 'Beauty collection' %}
-      {% render 'nav-link', url: routes.root_url, text: 'HOME', alt: 'Home' %}
-      {% render 'nav-link', url: '/pages/contact', text: 'CONTACT', alt: 'Contact' %}
-      {% assign cart_text = 'CART (' | append: cart.item_count | append: ')' %}
-      {% render 'nav-link', url: routes.cart_url, text: cart_text, alt: 'Shopping cart' %}
-    </div>
+  <div id="mobile-menu" class="hidden">
+    {% render 'nav-link', url: collections.women.url, text: 'WOMEN', alt: 'Women collection' %}
+    {% render 'nav-link', url: collections.men.url, text: 'MEN', alt: 'Men collection' %}
+    {% render 'nav-link', url: routes.collections_url, text: 'SHOP', alt: 'All collections' %}
+    {% render 'nav-link', url: collections.beauty.url, text: 'BEAUTY', alt: 'Beauty collection' %}
+    {% render 'nav-link', url: routes.root_url, text: 'HOME', alt: 'Home' %}
+    {% render 'nav-link', url: '/pages/contact', text: 'CONTACT', alt: 'Contact' %}
+    {% assign cart_text = 'CART (' | append: cart.item_count | append: ')' %}
+    {% render 'nav-link', url: routes.cart_url, text: cart_text, alt: 'Shopping cart' %}
   </div>
 </nav>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded');
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    console.log('Button:', mobileMenuButton);
-    console.log('Menu:', mobileMenu);
-
-    if (mobileMenuButton && mobileMenu) {
-      console.log('Adding click listener');
-      mobileMenuButton.addEventListener('click', () => {
-        console.log('Button clicked');
-        mobileMenu.classList.toggle('hidden');
-        console.log('Menu classes:', mobileMenu.className);
-      });
-    } else {
-      console.log('Elements not found');
-      if (!mobileMenuButton) console.log('Button not found');
-      if (!mobileMenu) console.log('Menu not found');
-    }
-  });
-</script>
+{% render 'vite-tag' with 'nav.ts' %}

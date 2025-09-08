@@ -19,13 +19,13 @@
       {% else %}
         {% assign source_products = collections.all.products %}
       {% endif %}
-      
+
       {% if source_products.size > 0 %}
         {% for product in source_products limit: section.settings.products_to_show %}
           <a href="{{ product.url }}" class="relative group block cursor-pointer">
             <div class="relative aspect-square overflow-hidden">
               {% if product.featured_image %}
-                <img 
+                <img
                   src="{{ product.featured_image | image_url: width: 400 }}"
                   alt="{{ product.featured_image.alt | escape }}"
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -36,12 +36,12 @@
                   <span class="text-gray-400">No image</span>
                 </div>
               {% endif %}
-              
+
               <div class="absolute top-3 right-3 bg-black bg-opacity-80 text-white px-3 py-1.5 text-sm font-semibold">
                 {{ product.price | money }}
               </div>
             </div>
-            
+
             <div class="py-4 px-4 flex items-center justify-between">
               <h3 class="text-lg font-semibold leading-tight">{{ product.title }}</h3>
               <span class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 font-semibold uppercase tracking-wide transition-colors duration-300 pointer-events-none">
@@ -53,15 +53,17 @@
       {% else %}
         <!-- Fallback message when no products exist -->
         <div class="col-span-full text-center py-12">
-          <p class="text-gray-500 text-lg">No products found. Add some products to your Shopify store to see them here.</p>
+          <p class="text-gray-500 text-lg">
+            No products found. Add some products to your Shopify store to see them here.
+          </p>
         </div>
       {% endif %}
     </div>
 
     {% if section.settings.show_view_all and section.settings.collection != blank %}
       <div class="text-center mt-12">
-        <a 
-          href="{{ collections[section.settings.collection].url }}" 
+        <a
+          href="{{ collections[section.settings.collection].url }}"
           class="inline-block bg-gray-900 text-white px-8 py-3 hover:bg-gray-800 transition-colors font-medium"
         >
           View All Products
