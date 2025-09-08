@@ -35,5 +35,5 @@ jobs:
         run: |
           shopify theme push \
             --store nightshift-dev.myshopify.com \
-            --allow-live --json \
+            --publish --json \
             --password ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
