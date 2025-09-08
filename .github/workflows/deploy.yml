@@ -32,10 +32,6 @@ jobs:
         run: npm install -g @shopify/cli @shopify/theme
 
       - name: Deploy to Shopify
-        run: |
-          shopify theme push \
-            --store ${{ vars.SHOPIFY_STORE }} \
-            --theme ${{ vars.SHOPIFY_THEME_ID || 'development' }} \
-            --password ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }} \
-            --allow-live \
-            --json
+        run: shopify theme push --store nightshift-dev.myshopify.com --allow-live --json
+        env:
+          SHOPIFY_CLI_TOKEN: ${{ secrets.SHOPIFY_CLI_TOKEN }}
