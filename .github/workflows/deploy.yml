@@ -36,5 +36,5 @@ jobs:
           shopify theme push \
             --store nightshift-dev.myshopify.com \
             --unpublished --json --publish \
-            --theme "Nightshift-${{ github.sha }}" \
+            --theme "Nightshift" \
             --password ${{ secrets.SHOPIFY_CLI_THEME_TOKEN }}
