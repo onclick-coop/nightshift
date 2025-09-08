@@ -5,7 +5,8 @@ const mobileMenuVariants = cva([
 ], {
   variants: {
     state: {
-      open: 'max-h-96 opacity-100',
+      // Hardcoded max height to accommodate the menu items, adjust as necessary
+      open: 'max-h-[337px] opacity-100',
       closed: 'max-h-0 opacity-0',
     },
   },
