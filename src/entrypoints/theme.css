@@ -42,6 +42,20 @@ main .shopify-section {
   @apply animate-spin border-t-transparent;
 }
 
+/* Hero section fade in */
+.h-hero-section {
+  animation: heroFadeIn 1s ease-out;
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Hero background with Vite asset import */
 .hero-fallback-bg {
   @apply bg-cover bg-center;

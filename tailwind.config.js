@@ -49,7 +49,7 @@ const nightshiftTheme = {
     'hero-section': 'calc(100vh - 64px - 56px)',
   },
   fontSize: {
-    'hero-content': [linearClamp(11, 28), 1.25],
+    'hero-content': [linearClamp(12, 26), 1.25],
 
     // callout: [linearClamp(16, 20), linearClamp(16 * 1.625, 20 * 1.625)],
 

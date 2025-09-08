@@ -1,15 +1,13 @@
 <section class="h-hero-section relative flex items-end overflow-hidden">
-  {% if section.settings.background_video %}
-    <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline>
-      <source src="{{ section.settings.background_video | file_url }}" type="video/mp4">
-    </video>
-  {% elsif section.settings.background_image %}
+  {% if section.settings.background_image %}
     <div
       class="hero-fallback-bg absolute inset-0"
       style="--hero-bg: url('{{ section.settings.background_image | image_url: width: 1920 }}')"
     ></div>
   {% else %}
-    <div class="hero-fallback-bg absolute inset-0"></div>
+    <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline>
+      <source src="https://cdn.shopify.com/videos/c/o/v/e68aa85d4cfb47aca4befae6753a2431.mp4" type="video/mp4">
+    </video>
   {% endif %}
 
   <div class="relative z-10 w-full">
@@ -25,12 +23,6 @@
 {
   "name": "Hero Section",
   "settings": [
-    {
-      "type": "text",
-      "id": "background_video",
-      "label": "Background Video URL",
-      "info": "Direct URL to MP4 video file. Upload to Files in Shopify admin first."
-    },
     {
       "type": "image_picker",
       "id": "background_image",
