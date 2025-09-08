@@ -1,7 +1,7 @@
 <section class="h-hero-section relative flex items-end overflow-hidden">
   {% if section.settings.background_video %}
     <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline>
-      <source src="{{ section.settings.background_video }}" type="video/mp4">
+      <source src="{{ section.settings.background_video | file_url }}" type="video/mp4">
     </video>
   {% elsif section.settings.background_image %}
     <div
@@ -26,7 +26,7 @@
   "name": "Hero Section",
   "settings": [
     {
-      "type": "url",
+      "type": "text",
       "id": "background_video",
       "label": "Background Video URL",
       "info": "Direct URL to MP4 video file. Upload to Files in Shopify admin first."
